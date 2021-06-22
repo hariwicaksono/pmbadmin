@@ -107,6 +107,7 @@
 <!-- endinject -->
 <!-- inject:js -->
 <script src="<?php echo base_url()?>/templates/js/template.js"></script>
+<script src="<?php echo base_url()?>/templates/vendors/sweetalert2/sweetalert2.all.min.js"></script>
 <!-- endinject -->
 <?php if (isset($validation)): ?>
 <script>
@@ -115,7 +116,6 @@
         $.toast({
         heading: 'Danger',
         text: "<?= session()->get('error') ?>",
-        showHideTransition: 'slide',
         icon: 'error',
         loaderBg: '#f2a654',
         position: 'top-right'
