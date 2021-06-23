@@ -112,6 +112,38 @@
             </div>
         </div>
     </div>
-</body>
 
+    <script src="<?php echo base_url()?>/templates/vendors/sweetalert2/sweetalert2.all.min.js"></script>
+<?php if (session()->get('error')): ?>
+<script>
+   const Toast = Swal.mixin({
+		toast: true,
+		position: 'top',
+		showConfirmButton: true,
+		timer: 5000
+		});
+
+		Toast.fire({
+        icon: 'error',
+        title: "&nbsp; <?= session()->get('error') ?>"
+      })
+</script>
+<?php endif; ?>
+
+<?php if (session()->get('success')): ?>
+<script>
+   const Toast = Swal.mixin({
+		toast: true,
+		position: 'top',
+		showConfirmButton: true,
+		timer: 5000
+		});
+
+		Toast.fire({
+        icon: 'success',
+        title: "&nbsp; <?= session()->get('success') ?>"
+      })
+</script>
+<?php endif; ?>
+</body>
 </html>

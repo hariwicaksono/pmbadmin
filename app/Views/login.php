@@ -4,50 +4,60 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 		<!-- font css -->
-	<link rel="stylesheet" href="<?php echo base_url()?>/templates/vendors/iconfonts/simple-line-icon/css/simple-line-icons.css">
-  <link rel="stylesheet" href="<?php echo base_url()?>/templates/vendors/iconfonts/flag-icon-css/css/flag-icon.min.css">
-  <link rel="stylesheet" href="<?php echo base_url()?>/templates/vendors/css/vendor.bundle.base.css">
-  <link rel="stylesheet" href="<?php echo base_url()?>/templates/vendors/css/vendor.bundle.addons.css">
-	<!-- vendor css -->
-	<link rel="stylesheet" href="<?php echo base_url()?>/templates/css/style.css?v=<?=mt_rand();?>" id="main-style-link">
+    <link rel="stylesheet" href="<?php echo base_url()?>/templates/vendors/iconfonts/simple-line-icon/css/simple-line-icons.css">
+    <link rel="stylesheet" href="<?php echo base_url()?>/templates/vendors/iconfonts/flag-icon-css/css/flag-icon.min.css">
+    <link rel="stylesheet" href="<?php echo base_url()?>/templates/vendors/css/vendor.bundle.base.css">
+    <link rel="stylesheet" href="<?php echo base_url()?>/templates/vendors/css/vendor.bundle.addons.css">
+    <!-- vendor css -->
+    <link rel="stylesheet" href="<?php echo base_url()?>/templates/css/style.css?v=<?=mt_rand();?>" id="main-style-link">
     <title>SIPMB</title>
 
     <style>
-.errors {margin-bottom:0 !important;font-size: 12px;}
-
-      </style>
+    .errors {margin-bottom:0 !important;font-size: 12px;}
+    .card.card-body {
+      border-color: #ced4da;
+    }
+    .form-control {
+      border-color: #ced4da;
+    }
+    .input-group-append .input-group-text,
+    .input-group-prepend .input-group-text,
+    .asColorPicker-trigger .input-group-text {
+      border-color: #ced4da;
+    }
+    </style>
   </head>
 <body>
 
-<div class="container mt-2">
+<div class="container mt-3">
 
 <div class="row justify-content-center">
 <div class="col-md-12">
 
-  <div class="card bg-primary text-white mb-0" style="background-color: #56348B !important">
+  <div class="card bg-primary text-white mb-0 rounded" style="background-color: #56348B !important">
     <div class="card-body">
       <div class="row">
         <div class="col-md-2">
         <img src="<?php echo base_url()?>/images/logo_uap.png" width="80" alt="" title="">
         </div>
         <div class="col-md-10" style="margin-left: -70px;">
-        <h1 class="h3 text-white"><?php //echo $profil['NAMA']; ?></h1>
-        <p class="mb-0"><?php //echo $profil['ALAMAT1'].', '.$profil['KOTA'].', Kode Pos: '.$profil['KODE_POS'].', Telp: '.$profil['TELEPON'];?></p>
+        <h1 class="h3 text-white"><?php echo $profil['NAMA']; ?></h1>
+        <p class="mb-0"><?php echo $profil['ALAMAT1'].', '.$profil['KOTA'].', Kode Pos: '.$profil['KODE_POS'].', Telp: '.$profil['TELEPON'];?></p>
         </div>
       </div>
     </div>
 
 
-    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #F9AA2E">
+    <nav class="navbar navbar-expand-lg navbar-light py-0" style="background-color: #F9AA2E">
     <div class="container-fluid">
       <ul class="navbar-nav mr-auto">
-        <li class="nav-item">
+        <!--<li class="nav-item">
         <a class="nav-link active">[USER : <?php //if(!empty($userlogin)){echo $userlogin;}else{echo 'Guest';}?>]</a>
-        </li>
+        </li>-->
       </ul>
       <ul class="navbar-nav">
         <li class="nav-item">
-        <a class="nav-link active">TAHUN PMB [<?php //if(!empty($tahunpmb)){echo $tahunpmb;}else{echo "Tahun PMB";}?>]</a>
+        <a class="nav-link active"><i class="icon-exclamation"></i> TAHUN PMB [<?php if(!empty($tahunpmb)){echo $tahunpmb;}else{echo "Tahun PMB";}?>]</a>
         </li>
       </ul>
       </div>
@@ -55,10 +65,10 @@
   </div><!-- card -->
 
 
-  <div class="card shadow">
+  <div class="card shadow rounded">
     <div class="card-body">
 			  <div class="row justify-content-center">
-			    <div class="col-md-4 border border-3 p-4 shadow-sm">
+			    <div class="col-md-4 border shadow-sm p-4">
             <h4>Login</h4>
             <hr>
             <?php if (session()->get('success')): ?>
@@ -67,21 +77,28 @@
               </div>
             <?php endif; ?>
             <?php if (isset($validation)): ?>
-                  <div class="alert alert-danger" role="alert">
-                    <?= $validation->listErrors('my_list') ?>
-                  </div>
+              <div class="alert alert-danger" role="alert">
+                <?= $validation->listErrors('my_list') ?>
+              </div>
               <?php endif; ?>
             <form class="" action="/" id="validation-form123" method="post">
               <div class="form-group">
-              <label for="NAMA">Username</label>
-              <input type="text" class="form-control" name="NAMA" id="NAMA" value="<?= set_value('NAMA') ?>">
+                <div class="input-group">
+                  <input type="text" class="form-control" name="NAMA" id="NAMA" placeholder="Username" value="<?= set_value('NAMA') ?>">
+                  <div class="input-group-append">
+                      <span class="input-group-text"><i class="icon-user"></i></span>
+                    </div>
+                </div>
               </div>
               <div class="form-group">
-              <label for="PASS">Password</label>
-              <input type="password" class="form-control" name="PASS" id="PASS" value="">
+                <div class="input-group">
+                    <input type="password" class="form-control" name="PASS" id="PASS" placeholder="Password" value="">
+                    <div class="input-group-append">
+                      <span class="input-group-text"><i class="icon-lock"></i></span>
+                    </div>
+                </div>
               </div>
-           
-              
+
               <button type="submit" class="btn btn-primary btn-block">Login</button>
                
             </form>
@@ -95,7 +112,7 @@
 
 
 <div id="foot_container" class="py-3">
-		<p class="text-center">&copy; Universitas Amikom Purwokerto <?php //echo $profil['NAMA'];?></p>
+		<p class="text-center">&copy; <?php echo $profil['NAMA'];?></p>
 	</div>
 
 </div>
@@ -107,22 +124,40 @@
 <!-- endinject -->
 <!-- inject:js -->
 <script src="<?php echo base_url()?>/templates/js/template.js"></script>
-<script src="<?php echo base_url()?>/templates/vendors/sweetalert2/sweetalert2.all.min.js"></script>
 <!-- endinject -->
-<?php if (isset($validation)): ?>
+<!--<script src="<?php //echo base_url()?>/templates/vendors/sweetalert2/sweetalert2.all.min.js"></script>
+<?php //if (session()->get('error')): ?>
 <script>
-    (function($) {
-      'use strict';
-        $.toast({
-        heading: 'Danger',
-        text: "<?= session()->get('error') ?>",
+   const Toast = Swal.mixin({
+		toast: true,
+		position: 'top',
+		showConfirmButton: true,
+		timer: 5000
+		});
+
+		Toast.fire({
         icon: 'error',
-        loaderBg: '#f2a654',
-        position: 'top-right'
+        title: "&nbsp; <?//= session()->get('error') ?>"
       })
-    })(jQuery);
 </script>
-<?php endif; ?>
+<?php //endif; ?>
+
+<?php //if (session()->get('success')): ?>
+<script>
+   const Toast = Swal.mixin({
+		toast: true,
+		position: 'top',
+		showConfirmButton: true,
+		timer: 5000
+		});
+
+		Toast.fire({
+        icon: 'success',
+        title: "&nbsp; <?//= session()->get('success') ?>"
+      })
+</script>
+<?php //endif; ?>-->
+
 <script>
 'use strict';
 $(document).ready(function() {

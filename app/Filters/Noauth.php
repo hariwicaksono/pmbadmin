@@ -10,7 +10,18 @@ class Noauth implements FilterInterface
     {
         // Do something here
         if(session()->get('isLoggedIn')){
-          return redirect()->to('/dashboard');
+            $status = session()->get();
+            if($status['STATUS']=='1'){			
+                return redirect()->to('dashboard1');
+            }elseif($status['STATUS']=='2'){	
+                return redirect()->to('dashboard');
+            }elseif($status['STATUS']=='10'){
+                return redirect()->to('dashboard3');
+            }elseif($status['STATUS']=='3'){
+                return redirect()->to('dashboard4');
+            }else{
+                
+            }
         }
 
     }

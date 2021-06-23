@@ -1,13 +1,21 @@
 <?php namespace App\Controllers;
 
 use App\Models\UserModel;
+use App\Models\ProfilPTModel;
+use App\Models\TahunModel;
 
-
-class Users extends BaseController
+class Auth extends BaseController
 {
 	public function index()
 	{
-		$data = [];
+		$this->ProfilPTModel = new ProfilPTModel();
+		$this->TahunModel = new TahunModel();
+
+		$data = [
+				'title' => 'Login',
+				'profil' => $this->ProfilPTModel->first(),
+				'tahunpmb' => $this->TahunModel->getThaPmb()
+		];
 		helper(['form']);
 
 
@@ -30,13 +38,23 @@ class Users extends BaseController
 				$session->setFlashdata('error', 'Pengguna or Password don\'t match');
 			}else{
 				$model = new UserModel();
-
 				$user = $model->where('NAMA', $this->request->getVar('NAMA'))
 											->first();
-
 				$this->setUserSession($user);
-				//$session->setFlashdata('success', 'Successful Registration');
-				return redirect()->to('dashboard');
+				$session = session();
+				$session->setFlashdata('success', 'Login Successful');
+				if($user['STATUS']=='1'){			
+					return redirect()->to('dashboard1');
+				}elseif($user['STATUS']=='2'){	
+					return redirect()->to('dashboard');
+				}elseif($user['STATUS']=='10'){
+					return redirect()->to('dashboard3');
+				}elseif($user['STATUS']=='3'){
+					return redirect()->to('dashboard4');
+				}else{
+					
+				}	
+				
 
 			}
 		}
@@ -129,8 +147,8 @@ class Users extends BaseController
 						$newData['password'] = $this->request->getPost('password');
 					}
 				$model->save($newData);
-
-				session()->setFlashdata('success', 'Successfuly Updated');
+				$session = session();
+				$session->setFlashdata('success', 'Successfuly Updated');
 				return redirect()->to('/profile');
 
 			}
@@ -143,8 +161,10 @@ class Users extends BaseController
 	}
 
 	public function logout(){
-		session()->destroy();
+		$session = session();
+		$session->destroy();
 		return redirect()->to('/');
+		
 	}
 
 	//--------------------------------------------------------------------

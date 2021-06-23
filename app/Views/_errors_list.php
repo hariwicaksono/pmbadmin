@@ -1,7 +1,6 @@
 <div class="errors">
-    
-    <?php foreach ($errors as $error) : ?>
-       <?= esc($error) ?>
-    <?php endforeach ?>
- 
+<i class="icon-exclamation"></i>
+<?php foreach ($errors as $error) : ?>
+    <?= esc($error) ?>
+<?php endforeach ?>
 </div>
